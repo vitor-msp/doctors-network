@@ -2,15 +2,15 @@ package br.com.sdconecta.doctorsnetwork.controllers.dto;
 
 import java.util.List;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 public class UserAggregateDto {
 
+	@NotNull
 	private UserDto user;
 	
-	@Size(min = 0)
 	private List<CrmDto> crms;
-
+	
 	public UserDto getUser() {
 		return user;
 	}

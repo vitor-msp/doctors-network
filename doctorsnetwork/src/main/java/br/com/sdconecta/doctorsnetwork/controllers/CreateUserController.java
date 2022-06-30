@@ -18,7 +18,6 @@ import br.com.sdconecta.doctorsnetwork.controllers.dto.UserAggregateDto;
 import br.com.sdconecta.doctorsnetwork.controllers.dto.UserDto;
 import br.com.sdconecta.doctorsnetwork.domain.Crm;
 import br.com.sdconecta.doctorsnetwork.domain.User;
-import br.com.sdconecta.doctorsnetwork.repositories.CrmRepository;
 import br.com.sdconecta.doctorsnetwork.repositories.UsersRepository;
 
 @CrossOrigin(origins = "*")
@@ -28,9 +27,6 @@ public class CreateUserController {
 
 	@Autowired
 	private UsersRepository usersRepository;
-	
-	@Autowired
-	private CrmRepository crmRepository;
 	
 	@PostMapping("/users")
 	public ResponseEntity<?> create(@Valid @RequestBody UserAggregateDto userAggrDto){
@@ -48,13 +44,15 @@ public class CreateUserController {
 				crms.add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
 			}
 			
+			user.setCrms(crms);
+			
 			usersRepository.save(user);
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 			
 		} catch (Exception e) {
 
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Exception>(e ,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	};
 }

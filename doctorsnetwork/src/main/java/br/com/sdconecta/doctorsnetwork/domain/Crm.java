@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -28,15 +29,14 @@ public class Crm {
 		@Size(max = 255)
 		private String specialty;
 		
-		@NotBlank
+		@NotNull
 		@ManyToOne
 		private User user;
 		
 		public Crm() {}
 		
 		public Crm(@NotBlank @Size(max = 45) String crm, @NotBlank @Size(max = 2) String uf,
-				@Size(max = 255) String specialty, @NotBlank User user) {
-			super();
+				@Size(max = 255) String specialty, @NotNull User user) {
 			this.crm = crm;
 			this.uf = uf;
 			this.specialty = specialty;
