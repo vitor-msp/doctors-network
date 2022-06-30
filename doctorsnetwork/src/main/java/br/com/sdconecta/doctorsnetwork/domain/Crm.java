@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "crm")
-public class CRM {
+public class Crm {
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,17 @@ public class CRM {
 		@NotBlank
 		@ManyToOne
 		private User user;
+		
+		public Crm() {}
+		
+		public Crm(@NotBlank @Size(max = 45) String crm, @NotBlank @Size(max = 2) String uf,
+				@Size(max = 255) String specialty, @NotBlank User user) {
+			super();
+			this.crm = crm;
+			this.uf = uf;
+			this.specialty = specialty;
+			this.user = user;
+		}
 
 		public int getId() {
 			return id;

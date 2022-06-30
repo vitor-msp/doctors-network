@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sdconecta.doctorsnetwork.domain.CRM;
-import br.com.sdconecta.doctorsnetwork.repositories.CRMRepository;
+import br.com.sdconecta.doctorsnetwork.domain.Crm;
+import br.com.sdconecta.doctorsnetwork.repositories.CrmRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class CRMController {
+public class CrmController {
 
 	@Autowired
-	private CRMRepository crmRepository;
+	private CrmRepository crmRepository;
 	
 	@GetMapping("/crm")
-	public ResponseEntity<List<CRM>> getAll(){
+	public ResponseEntity<List<Crm>> getAll(){
 		
 		try {
 			
-			return new ResponseEntity<List<CRM>>(crmRepository.findAll(), HttpStatus.OK);
+			return new ResponseEntity<List<Crm>>(crmRepository.findAll(), HttpStatus.OK);
 			
 		} catch (Exception e) {
 
