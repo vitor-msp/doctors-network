@@ -22,8 +22,8 @@ public class GetAllUsersController {
 	@Autowired
 	private GetAllUsersService getAllUsersService;
 	
-	@GetMapping("/usersAll")
-	public ResponseEntity<?> get(
+	@GetMapping("/users")
+	public ResponseEntity<?> getAll(
 			@RequestParam(required = false, defaultValue = "") String name,
 			@RequestParam(required = false, defaultValue = "") String specialty){
 		
