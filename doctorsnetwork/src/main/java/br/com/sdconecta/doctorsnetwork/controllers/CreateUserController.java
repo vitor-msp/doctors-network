@@ -35,6 +35,10 @@ public class CreateUserController {
 			
 			UserDto userDto = userAggrDto.getUser();
 			
+			if(usersRepository.existsByEmail(userDto.email)) {
+				return new ResponseEntity<String>("Email already in use" ,HttpStatus.BAD_REQUEST);
+			}
+			
 			User user = new User(
 					userDto.email, userDto.password, userDto.name, userDto.surname, userDto.mobilePhone);
 			
