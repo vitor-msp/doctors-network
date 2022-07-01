@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sdconecta.doctorsnetwork.domain.User;
 import br.com.sdconecta.doctorsnetwork.services.GetAllUsersService;
-import br.com.sdconecta.doctorsnetwork.services.GetUserService;
 
 @CrossOrigin(origins = "*")
 @RestController

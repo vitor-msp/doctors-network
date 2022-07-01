@@ -1,7 +1,6 @@
 package br.com.sdconecta.doctorsnetwork.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,5 @@ public class GetAllUsersService {
 	public List<User> execute(String name, String specialty){
 		
 		return usersRepository.findDistinctByNameContainingAndCrms_SpecialtyContaining(name, specialty);
-
 	};
 }
