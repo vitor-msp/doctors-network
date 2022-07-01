@@ -40,8 +40,11 @@ public class CreateUserController {
 			
 			ArrayList<Crm> crms = new ArrayList<>();
 			
-			for (CrmDto crmDto: userAggrDto.getCrms()) {
-				crms.add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
+			if(!userAggrDto.crms.isEmpty()) {
+				
+				for (CrmDto crmDto: userAggrDto.getCrms()) {
+					crms.add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
+				}
 			}
 			
 			user.setCrms(crms);
