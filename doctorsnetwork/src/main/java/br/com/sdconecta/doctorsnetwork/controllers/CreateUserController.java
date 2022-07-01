@@ -1,7 +1,5 @@
 package br.com.sdconecta.doctorsnetwork.controllers;
 
-import java.util.ArrayList;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sdconecta.doctorsnetwork.controllers.dto.CrmDto;
 import br.com.sdconecta.doctorsnetwork.controllers.dto.UserAggregateDto;
-import br.com.sdconecta.doctorsnetwork.controllers.dto.UserDto;
-import br.com.sdconecta.doctorsnetwork.domain.Crm;
-import br.com.sdconecta.doctorsnetwork.domain.User;
-import br.com.sdconecta.doctorsnetwork.repositories.UsersRepository;
+import br.com.sdconecta.doctorsnetwork.services.CreateUserService;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -26,40 +20,24 @@ import br.com.sdconecta.doctorsnetwork.repositories.UsersRepository;
 public class CreateUserController {
 
 	@Autowired
-	private UsersRepository usersRepository;
+	private CreateUserService createUserService;
 	
 	@PostMapping("/users")
 	public ResponseEntity<?> create(@Valid @RequestBody UserAggregateDto userAggrDto){
 		
 		try {
 			
-			UserDto userDto = userAggrDto.getUser();
-			
-			if(usersRepository.existsByEmail(userDto.email)) {
-				return new ResponseEntity<String>("Email already in use" ,HttpStatus.BAD_REQUEST);
-			}
-			
-			User user = new User(
-					userDto.email, userDto.password, userDto.name, userDto.surname, userDto.mobilePhone);
-			
-			ArrayList<Crm> crms = new ArrayList<>();
-			
-			if(!userAggrDto.crms.isEmpty()) {
-				
-				for (CrmDto crmDto: userAggrDto.getCrms()) {
-					crms.add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
-				}
-			}
-			
-			user.setCrms(crms);
-			
-			usersRepository.save(user);
+			createUserService.execute(userAggrDto);
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 			
+		} catch (RuntimeException e) {
+
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+			
 		} catch (Exception e) {
 
-			return new ResponseEntity<Exception>(e ,HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	};
 }
