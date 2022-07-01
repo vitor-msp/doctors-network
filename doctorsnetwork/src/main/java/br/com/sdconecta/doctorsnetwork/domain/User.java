@@ -43,7 +43,7 @@ public class User {
 	@Size(max = 255)
 	private String mobilePhone;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Crm> crms;
 	
 	public User() {}
