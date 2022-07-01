@@ -1,4 +1,4 @@
-package br.com.sdconecta.doctorsnetwork.controllers.dto;
+package br.com.sdconecta.doctorsnetwork.requestModel;
 
 import java.util.ArrayList;
 import java.util.List;

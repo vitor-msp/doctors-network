@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.sdconecta.doctorsnetwork.controllers.dto.CrmDto;
-import br.com.sdconecta.doctorsnetwork.controllers.dto.UserAggregateDto;
-import br.com.sdconecta.doctorsnetwork.controllers.dto.UserDto;
 import br.com.sdconecta.doctorsnetwork.domain.Crm;
 import br.com.sdconecta.doctorsnetwork.domain.User;
 import br.com.sdconecta.doctorsnetwork.repositories.UsersRepository;
+import br.com.sdconecta.doctorsnetwork.requestModel.CrmDto;
+import br.com.sdconecta.doctorsnetwork.requestModel.UserAggregateDto;
+import br.com.sdconecta.doctorsnetwork.requestModel.UserDto;
 
 @Service
 public class CreateUserService {
