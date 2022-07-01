@@ -26,6 +26,10 @@ public class EditUserService {
 		
 		UserDto userDto = userAggrDto.getUser();
 		
+		if(usersRepository.existsByEmail(userDto.email)) {
+			throw new RuntimeException("Email already in use");
+		}
+		
 		User user = new User(
 				userDto.email, userDto.password, userDto.name, userDto.surname, userDto.mobilePhone);
 		
