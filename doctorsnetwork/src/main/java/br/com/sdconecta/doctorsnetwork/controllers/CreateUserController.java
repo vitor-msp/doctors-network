@@ -16,7 +16,7 @@ import br.com.sdconecta.doctorsnetwork.services.CreateUserService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class CreateUserController {
 
 	@Autowired

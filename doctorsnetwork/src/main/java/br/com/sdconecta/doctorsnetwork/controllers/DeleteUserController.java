@@ -14,7 +14,7 @@ import br.com.sdconecta.doctorsnetwork.services.DeleteUserService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class DeleteUserController {
 
 	@Autowired

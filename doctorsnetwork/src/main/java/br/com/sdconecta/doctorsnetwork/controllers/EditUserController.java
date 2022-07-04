@@ -17,7 +17,7 @@ import br.com.sdconecta.doctorsnetwork.services.EditUserService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class EditUserController {
 
 	@Autowired
