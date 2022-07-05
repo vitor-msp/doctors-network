@@ -3,6 +3,7 @@ package br.com.sdconecta.doctorsnetwork.services;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.sdconecta.doctorsnetwork.domain.Crm;
@@ -14,6 +15,9 @@ import br.com.sdconecta.doctorsnetwork.requestModel.UserDto;
 
 @Service
 public class CreateUserService {
+	
+	@Autowired
+	PasswordEncoder encoder;
 
 	@Autowired
 	private UsersRepository usersRepository;
@@ -27,7 +31,8 @@ public class CreateUserService {
 		}
 		
 		User user = new User(
-				userDto.email, userDto.password, userDto.name, userDto.surname, userDto.mobilePhone);
+				userDto.email, encoder.encode(userDto.password),
+				userDto.name, userDto.surname, userDto.mobilePhone);
 		
 		if(!userAggrDto.crms.isEmpty()) {
 		
