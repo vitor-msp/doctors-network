@@ -1,6 +1,5 @@
 package br.com.sdconecta.doctorsnetwork.services;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +44,11 @@ public class EditUserService {
 		
 		if(!userAggrDto.crms.isEmpty()) {
 		
-			ArrayList<Crm> crms = new ArrayList<>();
+			user.getCrms().clear();
 			
 			for (CrmDto crmDto: userAggrDto.getCrms()) {
-				crms.add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
+				user.getCrms().add(new Crm(crmDto.crm, crmDto.uf, crmDto.specialty, user));
 			}
-		
-			user.setCrms(crms);
 		}
 		
 		usersRepository.save(user);
