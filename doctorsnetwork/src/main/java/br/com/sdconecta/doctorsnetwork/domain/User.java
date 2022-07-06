@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -29,6 +31,7 @@ public class User {
 	
 	@NotBlank
 	@Size(max = 255)
+	@JsonIgnore
 	private String password;
 	
 	@NotBlank
