@@ -1,9 +1,12 @@
 package br.com.sdconecta.doctorsnetwork.security.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,31 +28,26 @@ public class UserDetailsImpl implements UserDetails {
   private Collection<? extends GrantedAuthority> authorities;
 
   public UserDetailsImpl(
-		  Long id, String username, String email, String password
-//		  ,
-//		  Collection<? extends GrantedAuthority> authorities
-		  ) {
+		  Long id, String username, String email, String password,
+		  Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.username = username;
     this.email = email;
     this.password = password;
-//    this.authorities = authorities;
-    this.authorities = null;
+    this.authorities = authorities;
   }
 
   public static UserDetailsImpl build(User user) {
-//    List<GrantedAuthority> authorities = new ArrayList<>() {};//.stream().collect(Collectors.toList());
-//    		user.getRoles().stream()
-//        .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-//        .collect(Collectors.toList());
+
+	List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+	authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
     return new UserDetailsImpl(
     	Integer.toUnsignedLong(user.getId()),
         user.getEmail(),
         user.getEmail(),
-        user.getPassword()
-//        authorities
-        );
+        user.getPassword(),
+        authorities);
   }
 
   @Override

@@ -11,21 +11,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.com.sdconecta.doctorsnetwork.domain.Role;
 import br.com.sdconecta.doctorsnetwork.security.jwt.AuthEntryPointJwt;
 import br.com.sdconecta.doctorsnetwork.security.jwt.AuthTokenFilter;
 import br.com.sdconecta.doctorsnetwork.security.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-    // securedEnabled = true,
-    // jsr250Enabled = true,
-    prePostEnabled = true)
-@SuppressWarnings("deprecation")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -54,6 +55,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
       return new BCryptPasswordEncoder();
     }
+    
+//    @Bean
+//    @Override
+//    protected UserDetailsService userDetailsService() {
+//        UserDetails admin = User
+//                .withUsername("admin")
+//                .password(new BCryptPasswordEncoder().encode("admin"))
+//                .roles(Role.ADMIN.toString())
+//                .build();
+//         
+//        return new InMemoryUserDetailsManager(admin);
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -71,7 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 		.antMatchers("/h2/**").permitAll()
 		.antMatchers("/api/v1/login").permitAll()
-		.antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/v1/users/**").permitAll()
 		.anyRequest().authenticated();
 
       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

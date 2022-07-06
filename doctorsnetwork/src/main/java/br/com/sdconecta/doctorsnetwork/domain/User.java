@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -51,6 +53,9 @@ public class User {
 	
 	@Size(max = 255)
 	private String lastSDConectaAuthorizationStatus;
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	public User() {}
 	
@@ -126,5 +131,13 @@ public class User {
 
 	public void setLastSDConectaAuthorizationStatus(String lastSDConectaAuthorizationStatus) {
 		this.lastSDConectaAuthorizationStatus = lastSDConectaAuthorizationStatus;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.sdconecta.doctorsnetwork.domain.Crm;
+import br.com.sdconecta.doctorsnetwork.domain.Role;
 import br.com.sdconecta.doctorsnetwork.domain.User;
 import br.com.sdconecta.doctorsnetwork.repositories.UsersRepository;
 import br.com.sdconecta.doctorsnetwork.requestModel.CrmDto;
@@ -33,6 +34,8 @@ public class CreateUserService {
 		User user = new User(
 				userDto.email, encoder.encode(userDto.password),
 				userDto.name, userDto.surname, userDto.mobilePhone);
+		
+		user.setRole(Role.USER);
 		
 		if(!userAggrDto.crms.isEmpty()) {
 		
