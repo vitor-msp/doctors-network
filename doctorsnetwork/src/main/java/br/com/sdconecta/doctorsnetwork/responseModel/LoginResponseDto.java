@@ -4,9 +4,9 @@ public class LoginResponseDto {
 
 	private String jwt;
 	
-	private ResponseSDConectaDto SDConecta;
+	private SDConectaUserTokenResponseDto SDConecta;
 	
-	public LoginResponseDto(String jwt, ResponseSDConectaDto SDConecta) {
+	public LoginResponseDto(String jwt, SDConectaUserTokenResponseDto SDConecta) {
 		this.jwt = jwt;
 		this.SDConecta = SDConecta;
 	}
@@ -15,7 +15,7 @@ public class LoginResponseDto {
 		return jwt;
 	}
 
-	public ResponseSDConectaDto getSDConecta() {
+	public SDConectaUserTokenResponseDto getSDConecta() {
 		return SDConecta;
 	}
 }

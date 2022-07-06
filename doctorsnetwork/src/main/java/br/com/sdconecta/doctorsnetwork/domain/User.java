@@ -46,6 +46,9 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Crm> crms;
 	
+	@Size(max = 255)
+	private String lastSDConectaAuthorizationStatus;
+	
 	public User() {}
 	
 	public User(@NotBlank @Size(max = 255) String email, @NotBlank @Size(max = 255) String password,
@@ -112,5 +115,13 @@ public class User {
 
 	public void setCrms(List<Crm> crms) {
 		this.crms = crms;
+	}
+
+	public String getLastSDConectaAuthorizationStatus() {
+		return lastSDConectaAuthorizationStatus;
+	}
+
+	public void setLastSDConectaAuthorizationStatus(String lastSDConectaAuthorizationStatus) {
+		this.lastSDConectaAuthorizationStatus = lastSDConectaAuthorizationStatus;
 	}
 }

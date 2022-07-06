@@ -1,6 +1,6 @@
 package br.com.sdconecta.doctorsnetwork.responseModel;
 
-public class ResponseSDConectaDto {
+public class SDConectaUserTokenResponseDto {
 
 	private String access_token;
 	
@@ -8,9 +8,9 @@ public class ResponseSDConectaDto {
 
 	private String authorization_status;
 	
-	public ResponseSDConectaDto() {}
+	public SDConectaUserTokenResponseDto() {}
 
-	public ResponseSDConectaDto(String access_token, String refresh_token, String authorization_status) {
+	public SDConectaUserTokenResponseDto(String access_token, String refresh_token, String authorization_status) {
 		this.access_token = access_token;
 		this.refresh_token = refresh_token;
 		this.authorization_status = authorization_status;

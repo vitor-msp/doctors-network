@@ -7,11 +7,11 @@ public class LoginRequestDto {
 
 	@NotBlank
 	@Size(max = 255)
-	public String email;
+	private String email;
 	
 	@NotBlank
 	@Size(max = 255)
-	public String password;
+	private String password;
 
 	public String getEmail() {
 		return email;

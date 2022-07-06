@@ -1,31 +1,30 @@
 package br.com.sdconecta.doctorsnetwork.requestModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import br.com.sdconecta.doctorsnetwork.domain.Crm;
 
 public class UserSDConectaDto {
 
-	@NotBlank
-	@Size(max = 255)
 	public String email;
 	
-	@NotBlank
-	@Size(max = 255)
 	public String name;
 	
-	@NotBlank
-	@Size(max = 255)
 	public String surname;
 	
-	@NotBlank
-	@Size(max = 255)
 	public String mobile_phone;
 	
-//	@Valid
-//	public List<CrmDto> crms;
+	public List<CrmDto> crms;
+	
+	public UserSDConectaDto() {}
+
+	public UserSDConectaDto(String email, String name, String surname, String mobile_phone) {
+		this.email = email;
+		this.name = name;
+		this.surname = surname;
+		this.mobile_phone = mobile_phone;
+	}
 
 	public String getEmail() {
 		return email;
@@ -59,11 +58,22 @@ public class UserSDConectaDto {
 		this.mobile_phone = mobilePhone;
 	}
 	
-//	public List<CrmDto> getCrms() {
-//		return crms;
-//	}
-//
-//	public void setCrms(List<CrmDto> crms) {
-//		this.crms = crms;
-//	}
+	public List<CrmDto> getCrms() {
+		return crms;
+	}
+
+	public void setCrms(List<CrmDto> crms) {
+		this.crms = crms;
+	}
+	
+	public void setCrmsFromEntity(List<Crm> crms) {
+		
+		List<CrmDto> crmsDto = new ArrayList<>();
+		
+		crms.forEach(crm -> {
+			crmsDto.add(new CrmDto(crm.getCrm(), crm.getUf(), crm.getSpecialty()));
+		});
+		
+		this.crms = crmsDto;
+	}
 }

@@ -15,6 +15,16 @@ public class CrmDto {
 	
 	@Size(max = 255)
 	public String specialty;
+	
+	public CrmDto() {}
+
+	public CrmDto(@NotBlank @Size(max = 45) String crm, @NotBlank @Size(max = 2) String uf,
+			@Size(max = 255) String specialty) {
+		super();
+		this.crm = crm;
+		this.uf = uf;
+		this.specialty = specialty;
+	}
 
 	public String getCrm() {
 		return crm;
