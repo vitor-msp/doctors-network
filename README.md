@@ -29,11 +29,49 @@ sudo docker run -p 8080:8080 -d doctors-network
 
 ## Testes
 
-1. A API tem rota padrão [/api/v1](http://localhost:8080/api/v1) e disponibiliza as rotas abaixo:
+1. A API tem rota padrão [/api/v1](http://localhost:8080/api/v1)
 
-  - POST: /api/v1/users - cadastro de usuário
-  - PUT: /api/v1/users/:id - edição de usuário pelo id
-  - DELETE: /api/v1/users/:id - remoção de usuário pelo id
+2. O banco de dados (H2) pode ser acessado [aqui](http://localhost:8080/h2)
+
+3. Rotas:
+
+  - POST: /api/v1/login - autenticação de usuário - body: LoginBody
+    - para utilização dos endpoints autenticados, logar com e-mail "admin" e senha "admin", será retornado o Bearer token
+  - POST: /api/v1/users - cadastro de usuário - body: UserBody - usar Bearer token
+  - PUT: /api/v1/users/:id - edição de usuário pelo id - body: UserBody - usar Bearer token
+  - DELETE: /api/v1/users/:id - remoção de usuário pelo id - usar Bearer token
   - GET: /api/v1/users/:id - consulta de usuário pelo id
   - GET: /api/v1/users?name=User\_Name&specialty=User\_Specialty - consulta de usuários com filtros opcionais de nome e especialidade do usuário
-  - POST: /api/v1/auth - autenticação de usuário
+  
+4. Body:
+  - LoginBody:
+```
+{
+    "email": "user@email.com",
+    "password": "test123"
+}
+```
+
+  - UserBody:
+```
+{
+    "user": {
+        "email": "user@email.com",
+        "password": "test123",
+        "name": "user test",
+        "surname": "last name",
+        "mobilePhone": "1234"
+    },
+    "crms": [
+        {
+            "crm": "10",
+            "uf": "MG",
+            "specialty": "Pediatrician"
+        },
+        {
+            "crm": "20",
+            "uf": "SP"
+        }
+    ]
+}
+```
