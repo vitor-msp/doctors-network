@@ -42,7 +42,7 @@ sudo docker run -p 8080:8080 -d doctors-network
   - DELETE: /api/v1/users/:id - remoção de usuário pelo id - usar Bearer token
   - GET: /api/v1/users/:id - consulta de usuário pelo id
   - GET: /api/v1/users?name=User\_Name&specialty=User\_Specialty - consulta de usuários com filtros opcionais de nome e especialidade do usuário
-  
+  - POST: /api/v1/broadcast = envia mensagem para todos os usuários - body: BroadcastMsg - usar Bearer token
 4. Body:
   - LoginBody:
 ```
@@ -73,5 +73,12 @@ sudo docker run -p 8080:8080 -d doctors-network
             "uf": "SP"
         }
     ]
+}
+```
+
+  - BroadcastMsg:
+```
+{
+    "message": "mensagem a todos os usuários"
 }
 ```
